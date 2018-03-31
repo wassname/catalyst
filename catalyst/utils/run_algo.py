@@ -263,9 +263,9 @@ def _run(handle_data,
         # We still need to support bundles for other misc data, but we
         # can handle this later.
 
-        if start != pd.tslib.start.normalize() or \
-                        end != pd.tslib.end.normalize():
-            # todo: add to Sim_Params the option to start & end at specific times 
+        if start != pd.Timestamp(start).normalize() or \
+                        end != pd.Timestamp(end).normalize():
+            # todo: add to Sim_Params the option to start & end at specific times
             log.warn(
                 "Catalyst currently starts and ends on the start and "
                 "end of the dates specified, respectively. We hope to "
