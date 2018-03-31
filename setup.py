@@ -165,7 +165,7 @@ def _filter_requirements(lines_iter, filter_names=None,
 
 REQ_UPPER_BOUNDS = {
     'bcolz': '<1',
-    'pandas': '<0.20',
+    'pandas': '>=0.22',
     'empyrical': '<0.2.2',
 }
 
