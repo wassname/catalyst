@@ -16,7 +16,6 @@ import warnings
 from contextlib import contextmanager
 from functools import wraps
 
-from pandas.tslib import normalize_date
 import pandas as pd
 import numpy as np
 
@@ -564,7 +563,7 @@ cdef class BarData:
             })
 
     cdef bool _is_stale_for_asset(self, asset, dt, adjusted_dt, data_portal):
-        session_label = normalize_date(dt) # FIXME
+        session_label = dt.normalize_date() # FIXME
 
         if not asset.is_alive_for_session(session_label):
             return False

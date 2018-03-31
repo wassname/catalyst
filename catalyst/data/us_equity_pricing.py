@@ -49,7 +49,6 @@ from pandas import (
     to_datetime,
     Timestamp,
 )
-from pandas.tslib import iNaT
 from six import (
     iteritems,
     string_types,
@@ -422,7 +421,7 @@ class BcolzDailyBarWriter(object):
         )
 
         full_table.attrs['first_trading_day'] = (
-            earliest_date if earliest_date is not None else iNaT
+            earliest_date if earliest_date is not None else NaT
         )
 
         full_table.attrs['first_row'] = first_row

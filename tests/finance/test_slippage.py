@@ -21,7 +21,6 @@ import datetime
 from math import sqrt
 
 from nose_parameterized import parameterized
-from pandas.tslib import normalize_date
 import numpy as np
 import pandas as pd
 import pytz
@@ -1108,8 +1107,8 @@ class OrdersStopTestCase(WithSimParams,
             )),
         )
         days = pd.date_range(
-            start=normalize_date(self.minutes[0]),
-            end=normalize_date(self.minutes[-1])
+            start=self.minutes[0].normalize(),
+            end=self.minutes[-1].normalize()
         )
         with tmp_bcolz_equity_minute_bar_reader(
                 self.trading_calendar, days, assets) as reader:

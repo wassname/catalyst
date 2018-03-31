@@ -62,7 +62,6 @@ from __future__ import division
 import logbook
 
 import pandas as pd
-from pandas.tseries.tools import normalize_date
 
 from catalyst.finance.performance.period import PerformancePeriod
 from catalyst.errors import NoFurtherDataError
@@ -344,7 +343,7 @@ class PerformanceTracker(object):
         """
         self.position_tracker.sync_last_sale_prices(dt, False, data_portal)
         self.update_performance()
-        todays_date = normalize_date(dt)
+        todays_date = dt.normalize()
         account = self.get_account(False)
 
         bench_returns = self.all_benchmark_returns.loc[todays_date:dt]

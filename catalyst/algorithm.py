@@ -21,7 +21,6 @@ import logbook
 import pytz
 import pandas as pd
 from contextlib2 import ExitStack
-from pandas.tseries.tools import normalize_date
 import numpy as np
 
 from itertools import chain, repeat
@@ -1345,7 +1344,7 @@ class TradingAlgorithm(object):
         # Make sure the asset exists, and that there is a last price for it.
         # FIXME: we should use BarData's can_trade logic here, but I haven't
         # yet found a good way to do that.
-        normalized_date = normalize_date(self.datetime)
+        normalized_date = self.datetime.normalize()
 
         if normalized_date < asset.start_date:
             raise CannotOrderDelistedAsset(
@@ -1392,7 +1391,7 @@ class TradingAlgorithm(object):
             )
 
         if asset.auto_close_date:
-            day = normalize_date(self.get_datetime())
+            day = self.get_datetime().normalize()
 
             if day > min(asset.end_date, asset.auto_close_date):
                 # If we are after the asset's end date or auto close date, warn
@@ -2475,7 +2474,7 @@ class TradingAlgorithm(object):
         """
         Internal implementation of `pipeline_output`.
         """
-        today = normalize_date(self.get_datetime())
+        today = self.get_datetime().normalize()
         data = NO_DATA = object()
         try:
             data = self._pipeline_cache.unwrap(today)

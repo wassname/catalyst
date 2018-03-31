@@ -20,7 +20,6 @@ import numpy as np
 from numpy import float64, int64, nan
 import pandas as pd
 from pandas import isnull
-from pandas.tslib import normalize_date
 from six import iteritems
 from six.moves import reduce
 
@@ -439,7 +438,7 @@ class DataPortal(object):
                     (isinstance(asset, (Asset, ContinuousFuture))))
 
     def _get_fetcher_value(self, asset, field, dt):
-        day = normalize_date(dt)
+        day = dt.normalize()
 
         try:
             return \
@@ -1130,7 +1129,7 @@ class DataPortal(object):
         if self._asset_start_dates[sid] > dt:
             raise NoTradeDataAvailableTooEarly(
                 sid=sid,
-                dt=normalize_date(dt),
+                dt=dt.normalize(),
                 start_dt=start_date
             )
 
@@ -1138,7 +1137,7 @@ class DataPortal(object):
         if self._asset_end_dates[sid] < dt:
             raise NoTradeDataAvailableTooLate(
                 sid=sid,
-                dt=normalize_date(dt),
+                dt=dt.normalize(),
                 end_dt=end_date
             )
 
@@ -1262,7 +1261,7 @@ class DataPortal(object):
         if self._extra_source_df is None:
             return []
 
-        day = normalize_date(dt)
+        day = dt.normalize()
 
         if day in self._extra_source_df.index:
             assets = self._extra_source_df.loc[day]['sid']
