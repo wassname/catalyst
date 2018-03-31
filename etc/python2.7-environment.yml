@@ -43,7 +43,7 @@ dependencies:
   - multipledispatch==0.4.9
   - networkx==2.0
   - numexpr==2.6.4
-  - pandas==0.19.2
+  - pandas==0.22.0
   - pandas-datareader==0.5.0
   - patsy==0.4.1
   - pyparsing==2.2.0
